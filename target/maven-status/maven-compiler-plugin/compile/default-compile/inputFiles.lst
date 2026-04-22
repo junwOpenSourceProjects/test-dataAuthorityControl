@@ -1,10 +1,10 @@
 /Users/junw/Documents/GitHub/test-dataAuthorityControl/src/main/java/wo1261931780/stdataAuthorityControl/StDataAuthorityControlApplication.java
-/Users/junw/Documents/GitHub/test-dataAuthorityControl/src/main/java/wo1261931780/stdataAuthorityControl/config/MyDataPermissionHandler.java
-/Users/junw/Documents/GitHub/test-dataAuthorityControl/src/main/java/wo1261931780/stdataAuthorityControl/config/myInterceptor.java
-/Users/junw/Documents/GitHub/test-dataAuthorityControl/src/main/java/wo1261931780/stdataAuthorityControl/config/UserDataPermission.java
-/Users/junw/Documents/GitHub/test-dataAuthorityControl/src/main/java/wo1261931780/stdataAuthorityControl/config/DataScope.java
 /Users/junw/Documents/GitHub/test-dataAuthorityControl/src/main/java/wo1261931780/stdataAuthorityControl/config/DataPermission.java
 /Users/junw/Documents/GitHub/test-dataAuthorityControl/src/main/java/wo1261931780/stdataAuthorityControl/config/DataPermissionMapper.java
+/Users/junw/Documents/GitHub/test-dataAuthorityControl/src/main/java/wo1261931780/stdataAuthorityControl/config/DataScope.java
+/Users/junw/Documents/GitHub/test-dataAuthorityControl/src/main/java/wo1261931780/stdataAuthorityControl/config/MyDataPermissionHandler.java
 /Users/junw/Documents/GitHub/test-dataAuthorityControl/src/main/java/wo1261931780/stdataAuthorityControl/config/MyDataPermissionHandler2.java
-/Users/junw/Documents/GitHub/test-dataAuthorityControl/src/main/java/wo1261931780/stdataAuthorityControl/config/mybatisPlusInterceptor.java
 /Users/junw/Documents/GitHub/test-dataAuthorityControl/src/main/java/wo1261931780/stdataAuthorityControl/config/MyDataPermissionInterceptor.java
+/Users/junw/Documents/GitHub/test-dataAuthorityControl/src/main/java/wo1261931780/stdataAuthorityControl/config/UserDataPermission.java
+/Users/junw/Documents/GitHub/test-dataAuthorityControl/src/main/java/wo1261931780/stdataAuthorityControl/config/myInterceptor.java
+/Users/junw/Documents/GitHub/test-dataAuthorityControl/src/main/java/wo1261931780/stdataAuthorityControl/config/mybatisPlusInterceptor.java
