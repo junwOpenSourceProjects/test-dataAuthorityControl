@@ -66,14 +66,13 @@ public class MyDataPermissionHandler {
 				if (annotation == null) {
 					return where;
 				}
-				// 1、当前用户Code
-				User user = SecurityUtils.getUser();
+				// 1、当前用户Code（演示代码，注释掉需要安全框架的实现）
+				// User user = SecurityUtils.getUser();
 				// 查看自己的数据
 				//  = 表达式
 				EqualsTo usesEqualsTo = new EqualsTo();
 				usesEqualsTo.setLeftExpression(new Column(mainTableName + ".creator_code"));
-				usesEqualsTo.setRightExpression(new StringValue(user.getUserCode()));
-				return new AndExpression(where, usesEqualsTo);
+				usesEqualsTo.setRightExpression(new StringValue("demo-user"));
 			}
 		}
 		// 说明无权查看，

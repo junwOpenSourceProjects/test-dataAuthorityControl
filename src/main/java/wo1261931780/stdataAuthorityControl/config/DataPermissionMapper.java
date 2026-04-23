@@ -65,7 +65,7 @@ public interface DataPermissionMapper<T> extends BaseMapper<T> {
 	 */
 	@Override
 	@UserDataPermission
-	Integer selectCount(@Param(Constants.WRAPPER) Wrapper<T> queryWrapper);
+	Long selectCount(@Param(Constants.WRAPPER) Wrapper<T> queryWrapper);
 
 	/**
 	 * 根据 entity 条件，查询全部记录
