@@ -6,24 +6,49 @@
 - **Project Type**: Maven Java Project (Spring Boot)
 - **Description**: 数据权限控制测试项目，基于Spring Boot实现数据权限管理。
 - **Location**: /Users/junw/Documents/GitHub/test-dataAuthorityControl
+- **Tech Stack**: Spring Boot 3.4.4 + Java 25 + MyBatis-Plus 3.5.7 + MySQL
 
-## 2. Build Status
+## 2. Architecture
 
-**Compilation: FAILED**
+```mermaid
+graph TB
+    subgraph Controller["控制器层"]
+        API[API接口]
+    end
 
-### Compilation Errors
+    subgraph Service["服务层"]
+        DataScopeService[数据权限服务]
+    end
+
+    subgraph Interceptor["拦截器层"]
+        MyInterceptor[自定义拦截器]
+        MybatisPlusInterceptor[MyBatis拦截器]
+        DataPermissionHandler[数据权限处理器]
+    end
+
+    subgraph Config["配置层"]
+        DataScope[数据范围配置]
+        DataPermission[数据权限注解]
+    end
+
+    subgraph Storage["存储层"]
+        MySQL[(MySQL)]
+    end
+
+    API --> DataScopeService
+    DataScopeService --> MyInterceptor
+    MyInterceptor --> MybatisPlusInterceptor
+    MybatisPlusInterceptor --> DataPermissionHandler
+    DataPermissionHandler --> MySQL
+    DataScopeService --> DataScope
+    DataScopeService --> DataPermission
 ```
-mybatisPlusInterceptor.java:[16,8] implicitly declared classes are not supported in -source 17
-mybatisPlusInterceptor.java:[1,1] compact source file should not have package declaration
-```
-**Root Cause**: Source file has package declaration issue - file may be using Java 16+ compact source format incorrectly.
 
 ## 3. Project Structure
 
 ```
 test-dataAuthorityControl/
 ├── pom.xml
-├── mvnw / mvnw.cmd
 ├── src/main/java/wo1261931780/stdataAuthorityControl/
 │   ├── StDataAuthorityControlApplication.java
 │   ├── config/
@@ -44,11 +69,11 @@ test-dataAuthorityControl/
 
 ## 4. Technology Stack
 
-- Java 17
-- Spring Boot
-- MyBatis-Plus
+- Java 25
+- Spring Boot 3.4.4
+- MyBatis-Plus 3.5.7
 - MySQL
-- AOP (数据权限拦截)
+- Lombok 1.18.40
 
 ## 5. Key Features
 
@@ -58,10 +83,13 @@ test-dataAuthorityControl/
 - MyBatis拦截器
 - 用户权限范围控制
 
-## 6. README Status
+## 6. Build Commands
 
-- README.md: EXISTS
-- SPEC.md: CREATED (this file)
+```bash
+mvn clean compile     # 编译
+mvn clean package     # 打包
+mvn clean install     # 安装
+```
 
 ## 7. Gitignore
 
@@ -71,13 +99,28 @@ Standard Java gitignore covering:
 - Package archives (*.jar, *.war, etc.)
 - IDE files (.idea, .iml)
 - OS files (.DS_Store)
+- Maven target/
 
-## 8. Build Fix Suggestions
+## 9. Known Issues
 
-Fix the `mybatisPlusInterceptor.java` file:
-1. Ensure proper class declaration with `public class`
-2. Remove compact source format or add proper `package` statement at top
+**2026-04-23: 编译失败 - "compact source file" 错误**
 
-## 9. Last Updated
+问题原因：Java 25 编译器检测到 `MyBatisPlusInterceptorConfig.java` 文件首行存在空行或格式问题，导致 "compact source file should not have package declaration" 错误。
 
-2026-04-22
+涉及文件：
+- `src/main/java/wo1261931780/stdataAuthorityControl/config/MyBatisPlusInterceptorConfig.java`
+
+状态：这是已知源码问题。已删除该文件，保留原始 `mybatisPlusInterceptor.java`。新文件 `MyBatisPlusInterceptorConfig.java` 无法在 Java 25 下编译。
+
+**2026-04-23: 编译失败 - JSqlParser 类缺失**
+
+问题原因：源码中引用了 `net.sf.jsqlparser` 包中不存在的类：
+- `MyDataPermissionHandler.java:14` - `ItemsList` 类不存在
+- `MyDataPermissionHandler2.java:14` - `ItemsList` 类不存在
+- `MyDataPermissionInterceptor.java:11` - `SelectBody` 类不存在
+
+这可能是 JSqlParser 版本不兼容问题，源码引用了较新版本的 API。
+
+## 10. Last Updated
+
+2026-04-23
